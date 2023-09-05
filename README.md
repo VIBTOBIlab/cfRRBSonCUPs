@@ -30,3 +30,8 @@ All output files are in the cluster_files folder.
 - Here the --NGS flag should be used.
 
 4. Prep for methAtlas
+
+- Use the prep_methAtlas.py script to prep the references and the samples for deconvolution with methAtlas.
+- The input are the clustered samples + metadata from the previous step
+- The output is a dataframe in the format required for methatlas
+- The references and the samples should be prepped seperately
