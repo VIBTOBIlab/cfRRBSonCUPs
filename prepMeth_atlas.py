@@ -18,15 +18,21 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('--input', '-i', help='.csv file of all samples')
 parser.add_argument('--metadata', '-m', help='.csv file of all sample metadata')
-parser.add_argument('--output', '-o', help='output file name (.csv file)')
+parser.add_argument('--output', '-o', help='output directory')
 parser.add_argument('--names', '-n', help='list with sample names')
 parser.add_argument('--refs', action='store_true', help='use this argument if you want to use your samples as references in methAtlas')
 args = parser.parse_args()
 input = args.input
 metadata = args.metadata
-output = args.output
 names = args.names
 refs = args.refs
+
+# Output files
+output = args.output
+if refs == False:
+    output = output + "methAtlas_test.csv"
+if refs == True:
+    output = output + "methAtlas_train.csv"
 
 ## determine minimal coverage or count
 filter = 30
@@ -51,15 +57,15 @@ for sample in list(samples_df):
 samples_df.dropna(how='all', inplace=True)
 
 ## rename en drop redundant samples
-names_df = pd.read_csv(names, sep=';',index_col=[0],usecols=['smapleID','diagnosis'])
-samples_df.rename(columns=names_df['diagnosis'], inplace=True)
-they_who_must_not_be_named = [name for name in samples_df.columns if name not in names_df['diagnosis'].values.tolist()]
+names_df = pd.read_csv(names, sep=',',index_col=[0],usecols=['smapleID','name'])
+samples_df.rename(columns=names_df['name'], inplace=True)
+they_who_must_not_be_named = [name for name in samples_df.columns if name not in names_df['name'].values.tolist()]
 print(f"there are {len(they_who_must_not_be_named)} samples who will be dropped because their name is not in the list")
 samples_df.drop(columns = they_who_must_not_be_named, inplace=True)
 
 ## for references: group samples per tumor type and take median
 if refs == True:
-    print("these samples are processed as references")
+    print("the samples are processed as references")
 ### make sure all columns with same tumor type have same name
     samples_df.columns = samples_df.columns.str.split(' ').str[0]
 ### remove DMRs with to many Na values for a certain entity (here: less than half)
@@ -74,7 +80,7 @@ if refs == True:
 
 ## add index for methAthlas
 samples_df['CpGs'] = 'cg' + samples_df.index.astype(str)
-samples_df = samples_df.set_index("CpGs"
+samples_df = samples_df.set_index("CpGs")
 
 ## output
 samples_df.to_csv(output)

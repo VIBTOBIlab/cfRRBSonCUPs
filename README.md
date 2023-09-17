@@ -37,4 +37,4 @@ All output files are in the cluster_files folder.
 - The input are the clustered samples + metadata from the previous step and a list with sample IDs and names
 - If the samples are intended to be used as references in methAtlas, the --refs flag should be used
 - The name of references that belong to the same entity should start with the same letters. Any subsequent identifiers should be separated from the first part by a space, eg. "BRCA fsze", "BRCA 283", "BRCA d875",...
-- The output is a dataframe in the format required for methAtlas
+- The output is a directory of choice. The script produces a file ("methAtlas_test.csv" or "methAtlas_train.csv") in the format required for methAtlas
