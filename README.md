@@ -32,6 +32,9 @@ All output files are in the cluster_files folder.
 4. Prep for methAtlas
 
 - Use the prep_methAtlas.py script to prep the references and the samples for deconvolution with methAtlas.
-- The input are the clustered samples + metadata from the previous step
-- The output is a dataframe in the format required for methatlas
-- The references and the samples should be prepped seperately
+- usage: prepMeth_atlas.py [-h] [-i INPUT] [-m METADATA] [-n NAMEFILE]
+                          [-o OUTPUT] [--refs]  
+- The input are the clustered samples + metadata from the previous step and a list with sample IDs and names
+- If the samples are intended to be used as references in methAtlas, the --refs flag should be used
+- The name of references that belong to the same entity should start with the same letters. Any subsequent identifiers should be separated from the first part by a space, eg. "BRCA fsze", "BRCA 283", "BRCA d875",...
+- The output is a dataframe in the format required for methAtlas
