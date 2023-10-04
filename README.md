@@ -2,7 +2,7 @@
 CUP diagnosis with FFPE references
 
 1. DMR pipeline
-- Use the DMR pipeline on https://github.ugent.be/DePreterLab/DMRpipeline to find DMRs between references.
+- Use the DMR pipeline on [https://github.com/jwilkde/DMRpipeline](https://github.com/jwilkde/DMRpipeline) to find DMRs between references.
 - The input is a folder with .cov files (output from Bismark methylation calling) and a list with sample ID and group names.
 - The output is a folder with .csv files. Each .csv file is a list of DMRs between 2 groups. Here, the "DSS/groups" folder contain all DMRs between the grouped entities (BRCAc, HIGI, LUAD, SCC, DLBL, MESO, OCVA, SCLC, PRAD, SKCM and healthy) and the "DSS/subtypes" folder contains the different subtypes (BRCA and BRCAl; CHOL and GEJC; CSCC, ESCC and LUSC)
 
